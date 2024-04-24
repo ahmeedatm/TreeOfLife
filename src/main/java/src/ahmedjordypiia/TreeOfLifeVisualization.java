@@ -84,6 +84,10 @@ public class TreeOfLifeVisualization extends Application {
     private void drawTree(Group group, Node node, double x, double y, double angle, double length, int depth) {
         if (depth == 0) {
             drawBlossom(group, x, y); // Add a blossom at the end of the branch
+            // Add node name if it's a leaf node
+            if (node.isLeafNode()) {
+                drawNodeName(group, node.getName(), x, y);
+            }
             return;
         }
 
@@ -105,6 +109,18 @@ public class TreeOfLifeVisualization extends Application {
             i++;
         }
     }
+
+    private void drawNodeName(Group group, String name, double x, double y) {
+        Circle circle = new Circle(x * zoomFactor, y * zoomFactor, 5 * zoomFactor, Color.WHITE); // White circle background
+        group.getChildren().add(circle);
+
+        Circle blossom = new Circle(x * zoomFactor, y * zoomFactor, 4 * zoomFactor, Color.RED); // Red blossom
+        group.getChildren().add(blossom);
+
+        javafx.scene.text.Text text = new javafx.scene.text.Text(x * zoomFactor - 15, y * zoomFactor + 5, name); // Node name
+        group.getChildren().add(text);
+    }
+
 
     private void drawBlossom(Group group, double x, double y) {
         Circle blossom = new Circle(x * zoomFactor, y * zoomFactor, 5 * zoomFactor, Color.RED); // Create a red blossom
@@ -146,5 +162,13 @@ public class TreeOfLifeVisualization extends Application {
         public Map<Integer, Node> getChildren() {
             return children;
         }
+
+        public boolean isLeafNode() {
+            return leafNode;
+        }
+
+        public String getName() {
+            return name;
+        }
     }
-}
+    }
