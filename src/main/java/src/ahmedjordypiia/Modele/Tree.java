@@ -43,14 +43,14 @@ public class Tree {
         return new ArrayList<>(nodes.values());
     }
 
-    public Node searchNode(String name) {
-        for (Node node : nodes) {
-            if (node.getName().equalsIgnoreCase(name)) {
-                return node;
-            }
-        }
-        return null;
-    }
+//    public Node searchNode(String name) {
+//        for (Node node : nodes) {
+//            if (node.getName().equalsIgnoreCase(name)) {
+//                return node;
+//            }
+//        }
+//        return null;
+//    }
 
     public static void main(String[] args) {
         Tree tree = new Tree();
