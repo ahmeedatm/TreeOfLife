@@ -1,5 +1,6 @@
 package src.ahmedjordypiia.Modele;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Node {
     private int id;
@@ -32,10 +33,17 @@ public class Node {
     }
 
     public void addChildren(Node child) {
-        children.add(child);
+        if (this.children == null) {
+            this.children = new ArrayList<>();
+        }
+        this.children.add(child);
     }
 
     public ArrayList<Node> getChildren() {
         return children;
+    }
+
+    public boolean isLeafNode() {
+        return children.isEmpty();
     }
 }
