@@ -1,10 +1,5 @@
 package src.ahmedjordypiia.Modele;
-
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 public class Node {
     private int id;
@@ -42,11 +37,5 @@ public class Node {
 
     public ArrayList<Node> getChildren() {
         return children;
-    }
-
-    public static void main(String[] args) {
-        Node node = new Node(new String[]{"1", "Root", "1", "0", "0", "0", "0", "0"});
-        System.out.println(node.getId());
-        System.out.println(node.getName());
     }
 }

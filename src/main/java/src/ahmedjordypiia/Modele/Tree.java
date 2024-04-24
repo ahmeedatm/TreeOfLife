@@ -4,11 +4,18 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 public class Tree {
     private ArrayList<Node> nodes = new ArrayList<Node>();
+
+    public Tree(String nodesPath, String linksPath) {
+        try {
+            this.readNodesCSV(nodesPath);
+            this.readLinksCSV(linksPath);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     public void readNodesCSV(String filePath) throws IOException {
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
@@ -45,14 +52,17 @@ public class Tree {
         return nodes;
     }
 
-    public static void main(String[] args) {
-        Tree tree = new Tree();
-        try {
-            tree.readNodesCSV("src/main/resources/treeoflife_nodes_simplified.csv");
-            tree.readLinksCSV("src/main/resources/treeoflife_links_simplified.csv");
-        } catch (IOException e) {
-            e.printStackTrace();
+    public Node searchNode(String name) {
+        for (Node node : nodes) {
+            if (node.getName().equalsIgnoreCase(name)) {
+                return node;
+            }
         }
+        return null;
+    }
+
+    public static void main(String[] args) {
+        Tree tree = new Tree("src/main/resources/treeoflife_nodes_simplified.csv", "src/main/resources/treeoflife_links_simplified.csv");
 
         for (Node node : tree.getNodes()) {
             System.out.println(node.getName());
@@ -60,7 +70,6 @@ public class Tree {
                 System.out.println("  " + child.getName());
             }
         }
-
 
     }
 

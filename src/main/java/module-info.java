@@ -4,5 +4,8 @@ module src.ahmedjordypiia {
 
 
     opens src.ahmedjordypiia to javafx.fxml;
-    exports src.ahmedjordypiia;
+    exports src.ahmedjordypiia.Controle;
+    exports src.ahmedjordypiia.Main;
+    opens src.ahmedjordypiia.Main to javafx.fxml;
+    opens src.ahmedjordypiia.Controle to javafx.fxml;
 }
