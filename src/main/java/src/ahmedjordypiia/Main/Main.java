@@ -6,6 +6,7 @@ import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import src.ahmedjordypiia.Vue.TreeOfLifeVisual;
 
@@ -15,10 +16,10 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        primaryStage.setTitle("JavaFX TreeView Example");
+        primaryStage.setTitle("Tree Of Life");
 
         // Charger le fichier FXML
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/src/ahmedjordypiia/hello-view.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/src/ahmedjordypiia/treeOfLife.fxml"));
         Parent root = loader.load();
 
         // Créer une instance de TreeOfLifeVisual et obtenir le Group de l'arbre
@@ -26,10 +27,10 @@ public class Main extends Application {
         Group treeGroup = treeOfLifeVisual.getTreeGroup();
 
         // Obtenir une référence à l'AnchorPane dans le fichier FXML
-        AnchorPane anchorPane = (AnchorPane) root.lookup("#myAnchorPane");
+        BorderPane borderPane = (BorderPane) root.lookup("#borderPane");
 
         // Ajouter le Group de l'arbre à l'AnchorPane
-        anchorPane.getChildren().add(treeGroup);
+        borderPane.getChildren().add(treeGroup);
 
         // Définir la scène avec le Parent chargé
         Scene scene = new Scene(root);
