@@ -13,7 +13,6 @@ public class TreeOfLifeVisual {
 
     private final int WINDOW_WIDTH = 1000; // Modifiez cette valeur pour ajuster la largeur de la fenêtre
     private final int WINDOW_HEIGHT = 700; // Modifiez cette valeur pour ajuster la hauteur de la fenêtre
-    private Group root;
 
     public Group getTreeGroup() {
         Group root = new Group();
@@ -72,9 +71,5 @@ public class TreeOfLifeVisual {
 
         javafx.scene.text.Text text = new javafx.scene.text.Text(x - 15, y + 20, name); // Déplacez le texte un peu plus loin du centre du blossom
         group.getChildren().add(text);
-    }
-
-    public Group getRoot() {
-        return root;
     }
 }

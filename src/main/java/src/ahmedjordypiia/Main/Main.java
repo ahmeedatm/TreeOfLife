@@ -35,6 +35,10 @@ public class Main extends Application {
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
 
+        // Définir la taille de la fenêtre
+        primaryStage.setMinWidth(1000);
+        primaryStage.setMinHeight(700);
+
         primaryStage.show();
     }
 
