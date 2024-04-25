@@ -9,16 +9,14 @@ import javafx.scene.shape.Line;
 import javafx.stage.Stage;
 import src.ahmedjordypiia.Modele.*;
 
-public class TreeOfLifeVisual extends Application {
+public class TreeOfLifeVisual {
 
-    private final int WINDOW_WIDTH = 1600; // Modifiez cette valeur pour ajuster la largeur de la fenêtre
-    private final int WINDOW_HEIGHT = 1200; // Modifiez cette valeur pour ajuster la hauteur de la fenêtre
+    private final int WINDOW_WIDTH = 1000; // Modifiez cette valeur pour ajuster la largeur de la fenêtre
+    private final int WINDOW_HEIGHT = 700; // Modifiez cette valeur pour ajuster la hauteur de la fenêtre
+    private Group root;
 
-
-    @Override
-    public void start(Stage primaryStage) {
+    public Group getTreeGroup() {
         Group root = new Group();
-        Scene scene = new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT, Color.WHITE);
 
         try {
             // Charger les données des nœuds et des liens à partir des fichiers CSV
@@ -27,15 +25,13 @@ public class TreeOfLifeVisual extends Application {
             tree.readLinksCSV("src/main/resources/src/ahmedjordypiia/treeoflife_links_simplified.csv");
 
             // Dessiner l'arbre de vie
-            drawTree(root, tree.getNodes().get(0), WINDOW_WIDTH / 2, WINDOW_HEIGHT / 1.5, -90, 200, 8); // Changez la longueur de 100 à 200
+            drawTree(root, tree.getNodes().get(0), WINDOW_WIDTH / 2, WINDOW_HEIGHT / 1.25, -90, 150, 8); // Changez la longueur de 100 à 200
 
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        primaryStage.setTitle("Tree of Life");
-        primaryStage.setScene(scene);
-        primaryStage.show();
+        return root;
     }
 
     private void drawTree(Group group, Node node, double x, double y, double angle, double length, int depth) {
@@ -78,7 +74,7 @@ public class TreeOfLifeVisual extends Application {
         group.getChildren().add(text);
     }
 
-    public static void main(String[] args) {
-        launch(args);
+    public Group getRoot() {
+        return root;
     }
 }

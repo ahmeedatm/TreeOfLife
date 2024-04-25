@@ -2,15 +2,12 @@ package src.ahmedjordypiia.Main;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.TreeItem;
-import javafx.scene.control.TreeView;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import src.ahmedjordypiia.Modele.Node;
-import src.ahmedjordypiia.Modele.Tree;
+import src.ahmedjordypiia.Vue.TreeOfLifeVisual;
 
 import java.io.IOException;
 
@@ -21,7 +18,18 @@ public class Main extends Application {
         primaryStage.setTitle("JavaFX TreeView Example");
 
         // Charger le fichier FXML
-        Parent root = FXMLLoader.load(getClass().getResource("/src/ahmedjordypiia/hello-view.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/src/ahmedjordypiia/hello-view.fxml"));
+        Parent root = loader.load();
+
+        // Créer une instance de TreeOfLifeVisual et obtenir le Group de l'arbre
+        TreeOfLifeVisual treeOfLifeVisual = new TreeOfLifeVisual();
+        Group treeGroup = treeOfLifeVisual.getTreeGroup();
+
+        // Obtenir une référence à l'AnchorPane dans le fichier FXML
+        AnchorPane anchorPane = (AnchorPane) root.lookup("#myAnchorPane");
+
+        // Ajouter le Group de l'arbre à l'AnchorPane
+        anchorPane.getChildren().add(treeGroup);
 
         // Définir la scène avec le Parent chargé
         Scene scene = new Scene(root);
