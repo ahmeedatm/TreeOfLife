@@ -6,7 +6,6 @@ module src.ahmedjordypiia {
     exports src.ahmedjordypiia.Vue to javafx.graphics;
 
 
-    opens src.ahmedjordypiia to javafx.fxml;
     exports src.ahmedjordypiia.Controle;
     exports src.ahmedjordypiia.Main;
     opens src.ahmedjordypiia.Main to javafx.fxml;
