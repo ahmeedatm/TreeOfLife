@@ -6,6 +6,8 @@ import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.transform.Affine;
 import javafx.scene.transform.Scale;
 import javafx.stage.Stage;
 import src.ahmedjordypiia.Modele.*;
@@ -15,11 +17,18 @@ public class TreeOfLifeVisual {
     private final int WINDOW_WIDTH = 1000; // Modifiez cette valeur pour ajuster la largeur de la fenêtre
     private final int WINDOW_HEIGHT = 700; // Modifiez cette valeur pour ajuster la hauteur de la fenêtre
     private Scale scale = new Scale();
-    private double zoomIntensity = 1.1;
+    private final double zoomIntensity = 1.1;
+    private Affine affine = new Affine();
 
     public Group getTreeGroup() {
         Group root = new Group();
-
+        root.getTransforms().setAll(affine);
+        root.setOnScroll(event -> {
+            double delta = event.getDeltaY();
+            double scale = delta > 0 ? zoomIntensity : 1/zoomIntensity;
+            zoom(scale, event.getX(), event.getY());
+            event.consume();
+        });
         try {
             // Charger les données des nœuds et des liens à partir des fichiers CSV
             Tree tree = new Tree();
@@ -61,6 +70,7 @@ public class TreeOfLifeVisual {
 
             // Dessiner la branche
             Line line = new Line(x, y, xEnd, yEnd);
+            line.setStroke(Color.WHITE);
             group.getChildren().add(line);
 
             // Dessiner l'arbre pour cet enfant
@@ -73,9 +83,11 @@ public class TreeOfLifeVisual {
         group.getChildren().add(circle);
 
         Circle blossom = new Circle(x, y, 4, Color.RED); // Fleur rouge
+        blossom.setOpacity(0.5);
         group.getChildren().add(blossom);
 
         javafx.scene.text.Text text = new javafx.scene.text.Text(x - 15, y + 20, name); // Déplacez le texte un peu plus loin du centre du blossom
+        text.setFill(Color.WHITE);
         group.getChildren().add(text);
     }
 
@@ -87,5 +99,8 @@ public class TreeOfLifeVisual {
     public void zoomOut() {
         scale.setX(scale.getX() / zoomIntensity);
         scale.setY(scale.getY() / zoomIntensity);
+    }
+    public void zoom(double factor, double x, double y) {
+        affine.prependScale(factor, factor, x, y);
     }
 }
