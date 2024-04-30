@@ -19,7 +19,7 @@
          <children>
             <HBox alignment="CENTER_LEFT" prefHeight="9.0" prefWidth="40.0" spacing="5.0">
                <children>
-                  <Button maxWidth="55.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" style="-fx-min-width: 20px; -fx-min-height: 20px; -fx-max-width: 20px; -fx-max-height: 20px; -fx-background-radius: 10px; -fx-background-color: WHITE;" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS">
+                  <Button fx:id="zoomOutButton" maxWidth="55.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#zoomOut" prefHeight="25.0" prefWidth="25.0" style="-fx-min-width: 20px; -fx-min-height: 20px; -fx-max-width: 20px; -fx-max-height: 20px; -fx-background-radius: 10px; -fx-background-color: WHITE;" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS">
                      <graphic>
                         <ImageView fitHeight="23.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -28,7 +28,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button maxWidth="55.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" style="-fx-min-width: 20px; -fx-min-height: 20px; -fx-max-width: 20px; -fx-max-height: 20px; -fx-background-radius: 10px; -fx-background-color: WHITE;" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS">
+                  <Button fx:id="zoomInButton" maxWidth="55.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#zoomIn" prefHeight="25.0" prefWidth="25.0" style="-fx-min-width: 20px; -fx-min-height: 20px; -fx-max-width: 20px; -fx-max-height: 20px; -fx-background-radius: 10px; -fx-background-color: WHITE;" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS">
                      <graphic>
                         <ImageView fitHeight="26.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>

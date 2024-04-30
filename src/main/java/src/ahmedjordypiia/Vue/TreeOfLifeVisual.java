@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
+import javafx.scene.transform.Scale;
 import javafx.stage.Stage;
 import src.ahmedjordypiia.Modele.*;
 
@@ -13,6 +14,8 @@ public class TreeOfLifeVisual {
 
     private final int WINDOW_WIDTH = 1000; // Modifiez cette valeur pour ajuster la largeur de la fenêtre
     private final int WINDOW_HEIGHT = 700; // Modifiez cette valeur pour ajuster la hauteur de la fenêtre
+    private Scale scale = new Scale();
+    private double zoomIntensity = 1.1;
 
     public Group getTreeGroup() {
         Group root = new Group();
@@ -25,6 +28,9 @@ public class TreeOfLifeVisual {
 
             // Dessiner l'arbre de vie
             drawTree(root, tree.getNodes().get(0), WINDOW_WIDTH / 2, WINDOW_HEIGHT / 1.25, -90, 150, 8); // Changez la longueur de 100 à 200
+
+            // Appliquer un zoom sur l'arbre
+            root.getTransforms().add(scale);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -71,5 +77,15 @@ public class TreeOfLifeVisual {
 
         javafx.scene.text.Text text = new javafx.scene.text.Text(x - 15, y + 20, name); // Déplacez le texte un peu plus loin du centre du blossom
         group.getChildren().add(text);
+    }
+
+    public void zoomIn() {
+        scale.setX(scale.getX() * zoomIntensity);
+        scale.setY(scale.getY() * zoomIntensity);
+    }
+
+    public void zoomOut() {
+        scale.setX(scale.getX() / zoomIntensity);
+        scale.setY(scale.getY() / zoomIntensity);
     }
 }

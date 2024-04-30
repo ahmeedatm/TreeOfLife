@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import src.ahmedjordypiia.Controle.Recherche;
 import src.ahmedjordypiia.Vue.TreeOfLifeVisual;
 
 import java.io.IOException;
@@ -25,6 +26,10 @@ public class Main extends Application {
         // Créer une instance de TreeOfLifeVisual et obtenir le Group de l'arbre
         TreeOfLifeVisual treeOfLifeVisual = new TreeOfLifeVisual();
         Group treeGroup = treeOfLifeVisual.getTreeGroup();
+
+        // Get the controller and set the tree
+        Recherche controller = loader.getController();
+        controller.setTree(treeOfLifeVisual);
 
         // Obtenir une référence à l'AnchorPane dans le fichier FXML
         BorderPane borderPane = (BorderPane) root.lookup("#borderPane");
