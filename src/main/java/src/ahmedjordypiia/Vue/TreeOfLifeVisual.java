@@ -8,6 +8,7 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.transform.Affine;
+import javafx.scene.transform.NonInvertibleTransformException;
 import javafx.scene.transform.Scale;
 import javafx.stage.Stage;
 import src.ahmedjordypiia.Modele.*;
@@ -16,6 +17,9 @@ public class TreeOfLifeVisual {
 
     private final int WINDOW_WIDTH = 1000; // Modifiez cette valeur pour ajuster la largeur de la fenêtre
     private final int WINDOW_HEIGHT = 700; // Modifiez cette valeur pour ajuster la hauteur de la fenêtre
+
+    private double mouseAnchorX;
+    private double mouseAnchorY;
     private Scale scale = new Scale();
     private final double zoomIntensity = 1.1;
     private Affine affine = new Affine();
@@ -23,12 +27,43 @@ public class TreeOfLifeVisual {
     public Group getTreeGroup() {
         Group root = new Group();
         root.getTransforms().setAll(affine);
+
         root.setOnScroll(event -> {
             double delta = event.getDeltaY();
-            double scale = delta > 0 ? zoomIntensity : 1/zoomIntensity;
-            zoom(scale, event.getX(), event.getY());
+            double scale = delta > 0 ? zoomIntensity : 1 / zoomIntensity;
+            javafx.geometry.Point2D transformedPoint;
+            try {
+                transformedPoint = affine.inverseTransform(event.getX(), event.getY());
+            } catch (NonInvertibleTransformException e) {
+                throw new RuntimeException(e);
+            }
+            zoom(scale, transformedPoint.getX(), transformedPoint.getY());
             event.consume();
         });
+
+        //Drag and drop
+        root.setOnMousePressed(event -> {
+            // Capture the mouse position when the mouse button is pressed
+            mouseAnchorX = event.getX();
+            mouseAnchorY = event.getY();
+        });
+
+        root.setOnMouseDragged(event -> {
+            // Calculate the difference between the current mouse position and the anchor position
+            double deltaX = event.getX() - mouseAnchorX;
+            double deltaY = event.getY() - mouseAnchorY;
+
+            // Move the tree by the calculated amount
+            for (javafx.scene.Node node : root.getChildren()) {
+                node.setTranslateX(node.getTranslateX() + deltaX);
+                node.setTranslateY(node.getTranslateY() + deltaY);
+            }
+
+            // Update the anchor position
+            mouseAnchorX = event.getX();
+            mouseAnchorY = event.getY();
+        });
+
         try {
             // Charger les données des nœuds et des liens à partir des fichiers CSV
             Tree tree = new Tree();

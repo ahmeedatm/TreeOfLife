@@ -8,6 +8,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
@@ -15,7 +16,7 @@
 
 <BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: black; -fx-opacity: 0.9;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="src.ahmedjordypiia.Controle.Recherche">
    <top>
-      <HBox fx:id="topBar" alignment="CENTER" onMouseEntered="#setEnteredTopBar" onMouseExited="#setExitedTopBar" prefHeight="61.0" prefWidth="600.0" spacing="200.0" style="-fx-opacity: 0.9;" BorderPane.alignment="CENTER">
+      <HBox fx:id="topBar" alignment="CENTER" prefHeight="61.0" prefWidth="600.0" spacing="200.0" style="-fx-opacity: 0.9;" BorderPane.alignment="CENTER">
          <children>
             <HBox alignment="CENTER_LEFT" prefHeight="9.0" prefWidth="40.0" spacing="5.0">
                <children>
@@ -75,7 +76,7 @@
    <left>
       <StackPane fx:id="leftBar" alignment="TOP_LEFT" prefHeight="339.0" prefWidth="75.0" style="-fx-opacity: 0.9;" BorderPane.alignment="TOP_LEFT">
          <children>
-            <Rectangle fx:id="espece" arcHeight="25.0" arcWidth="25.0" fill="WHITE" height="20.0" onMouseEntered="#setEnteredEspece" onMouseExited="#setExitedEspece" stroke="BLACK" strokeType="INSIDE" width="93.0" />
+            <Rectangle fx:id="espece" arcHeight="25.0" arcWidth="25.0" fill="WHITE" height="20.0" stroke="BLACK" strokeType="INSIDE" width="93.0" />
             <Text fx:id="speciesName" strokeType="OUTSIDE" strokeWidth="0.0" text="Espèce" StackPane.alignment="TOP_CENTER">
                <font>
                   <Font size="8.0" />
@@ -102,4 +103,7 @@
          </BorderPane.margin>
       </StackPane>
    </left>
+   <center>
+      <Pane fx:id="treePane" prefHeight="696.0" prefWidth="1056.0" BorderPane.alignment="CENTER" />
+   </center>
 </BorderPane>

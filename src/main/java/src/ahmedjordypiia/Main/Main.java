@@ -23,20 +23,6 @@ public class Main extends Application {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/src/ahmedjordypiia/treeOfLife.fxml"));
         Parent root = loader.load();
 
-        // Créer une instance de TreeOfLifeVisual et obtenir le Group de l'arbre
-        TreeOfLifeVisual treeOfLifeVisual = new TreeOfLifeVisual();
-        Group treeGroup = treeOfLifeVisual.getTreeGroup();
-
-        // Get the controller and set the tree
-        Recherche controller = loader.getController();
-        controller.setTree(treeOfLifeVisual);
-
-        // Obtenir une référence à l'AnchorPane dans le fichier FXML
-        BorderPane borderPane = (BorderPane) root.lookup("#borderPane");
-
-        // Ajouter le Group de l'arbre à l'AnchorPane
-        borderPane.getChildren().add(treeGroup);
-
         // Définir la scène avec le Parent chargé
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);

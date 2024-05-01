@@ -2,10 +2,12 @@ package src.ahmedjordypiia.Controle;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
@@ -28,10 +30,14 @@ public class Recherche {
     private HBox topBar;
     @FXML
     private Rectangle espece;
-    TreeOfLifeVisual tree;
+    @FXML
+    private Pane treePane;
+    private TreeOfLifeVisual tree;
 
-    public void setTree(TreeOfLifeVisual tree) {
-        this.tree = tree;
+    public void initialize() {
+        TreeOfLifeVisual tree = new TreeOfLifeVisual();
+        Group treeGroup = tree.getTreeGroup();
+        treePane.getChildren().add(treeGroup);
     }
 
     @FXML
