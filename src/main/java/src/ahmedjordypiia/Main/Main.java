@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import src.ahmedjordypiia.Controle.Control;
 
 import java.io.IOException;
 
@@ -17,6 +18,10 @@ public class Main extends Application {
         // Charger le fichier FXML
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/src/ahmedjordypiia/treeOfLife.fxml"));
         Parent root = loader.load();
+
+        //set application to the controller
+        Control controller = loader.getController();
+        controller.setApplication(this);
 
         // Définir la scène avec le Parent chargé
         Scene scene = new Scene(root);

@@ -102,6 +102,7 @@ public class Control {
         Node node = tree.getTree().searchNode(name);
         if (node != null) {
             setCurrentNode(node);
+            openEspecePanel(null);
         }else {
             searchField.setPromptText("Espèce non trouvée");
             searchField.setStyle("-fx-prompt-text-fill: " + rgb(255, 0, 0));
