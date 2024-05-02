@@ -29,61 +29,62 @@ public class Control {
     private BorderPane borderPane;
 
     @FXML
-    private Rectangle espece;
-
-    @FXML
     private Button especeDetails;
 
     @FXML
     private StackPane leftBar;
 
     @FXML
-    private Button searchButton;
-
+    public Button zoomInButton;
     @FXML
-    private TextField searchField;
+    public Button zoomOutButton;
+    @FXML
+    public TextField searchField;
+    @FXML
+    public Button searchButton;
+    @FXML
+    public Text speciesName;
     @FXML
     private Text speciesDescription;
-
-    @FXML
-    private BorderPane speciesMenu;
-
-    @FXML
-    private Text speciesName;
-
     @FXML
     private Text speciesNameMenu;
-
     @FXML
-    private Hyperlink tolorgLink;
-
+    private BorderPane speciesMenu;
     @FXML
     private HBox topBar;
-
+    @FXML
+    private Hyperlink tolorgLink;
+    @FXML
+    private Rectangle espece;
     @FXML
     private Pane treePane;
-
-    @FXML
-    private Button zoomInButton;
-
-    @FXML
-    private Button zoomOutButton;
-
-    @FXML
+    private TreeOfLifeVisual tree;
     private ImageView speciesImage;
 
     private Node currentNode;
 
-    private TreeOfLifeVisual tree = new TreeOfLifeVisual();
     private Application application;
 
     public Control() throws IOException {
     }
 
     public void initialize() throws IOException {
+        tree = new TreeOfLifeVisual();
         Group treeGroup = tree.getTreeGroup();
         treePane.getChildren().add(treeGroup);
         speciesMenu.setVisible(false);
+
+        // Ajouter un gestionnaire d'événements de zoom à l'arbre
+        treePane.setOnScroll(event -> {
+            double zoomFactor = 1.05;
+            double deltaY = event.getDeltaY();
+            if (deltaY < 0){
+                zoomFactor = 0.95;
+            }
+            treeGroup.setScaleX(treeGroup.getScaleX() * zoomFactor);
+            treeGroup.setScaleY(treeGroup.getScaleY() * zoomFactor);
+            event.consume();
+        });
 
         tolorgLink = new Hyperlink();
         tolorgLink.setOnMouseClicked(event -> {
@@ -133,6 +134,26 @@ public class Control {
     }
 
     @FXML
+    void setEnteredTopBar(MouseEvent event) {
+        topBar.setOpacity(1);
+    }
+
+    @FXML
+    void setExitedTopBar(MouseEvent event) {
+        topBar.setOpacity(0.5);
+    }
+
+    @FXML
+    void setEnteredEspece(MouseEvent event) {
+        espece.setOpacity(1);
+    }
+
+    @FXML
+    void setExitedEspece(MouseEvent event) {
+        espece.setOpacity(0.5);
+    }
+
+    @FXML
     public void openLink(ActionEvent event) {
         if (currentNode != null) {
             // Ouvrir le lien dans le navigateur par défaut de l'utilisateur
@@ -161,4 +182,5 @@ public class Control {
     public TreeOfLifeVisual getTree() {
         return tree;
     }
+
 }
