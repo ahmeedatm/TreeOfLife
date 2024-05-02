@@ -7,6 +7,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
 import javafx.scene.transform.Affine;
 import javafx.scene.transform.NonInvertibleTransformException;
 import javafx.scene.transform.Scale;
@@ -71,9 +72,7 @@ public class TreeOfLifeVisual {
             tree.readLinksCSV("src/main/resources/src/ahmedjordypiia/treeoflife_links_simplified.csv");
 
             // Dessiner l'arbre de vie
-            drawTree(root, tree.getNodes().get(0), WINDOW_WIDTH / 2, WINDOW_HEIGHT / 1.25, -90, 150, 8); // Changez la longueur de 100 à 200
-
-            // Appliquer un zoom sur l'arbre
+            drawTree(root, tree, tree.getNodes().get(0), WINDOW_WIDTH / 2.25 , WINDOW_HEIGHT / 1.5, -140, 150, 8, 20); // 20 est la taille de texte initiale            // Appliquer un zoom sur l'arbre
             root.getTransforms().add(scale);
 
         } catch (Exception e) {
@@ -83,16 +82,21 @@ public class TreeOfLifeVisual {
         return root;
     }
 
-    private void drawTree(Group group, Node node, double x, double y, double angle, double length, int depth) {
+    private void drawTree(Group group, Tree tree, Node node, double x, double y, double angle, double length, int depth, double textSize) {
         // Dessiner le nom du nœud pour tous les nœuds, pas seulement les feuilles
-        drawNodeName(group, node.getName(), x, y);
+        drawNodeName(group, node.getName(), x, y, textSize);
 
         if (depth == 0) {
             return;
         }
 
         // Calculer l'angle entre chaque enfant
-        double angleStep = 180.0 / (node.getChildren().size() + 1);
+        double angleStep;
+        if (node == tree.getNodes().get(0)) { // Si le nœud actuel est le nœud racine
+            angleStep = 220.0 / (node.getChildren().size()); // Répartir les enfants sur 360 degrés
+        } else {
+            angleStep = 180.0 / (Math.max(node.getChildren().size(), 1) + 1);
+        }
 
         // Appels récursifs pour les branches plus petites
         for (int i = 0; i < node.getChildren().size(); i++) {
@@ -109,11 +113,11 @@ public class TreeOfLifeVisual {
             group.getChildren().add(line);
 
             // Dessiner l'arbre pour cet enfant
-            drawTree(group, child, xEnd, yEnd, childAngle, length * 0.7, depth - 1);
+            drawTree(group, tree, child, xEnd, yEnd, childAngle, length * 0.65, depth - 1, textSize * 0.75); // réduire la longueur des branches de 30% à chaque niveau
         }
     }
 
-    private void drawNodeName(Group group, String name, double x, double y) {
+    private void drawNodeName(Group group, String name, double x, double y, double textSize) {
         Circle circle = new Circle(x, y, 5, Color.WHITE); // Fond de cercle blanc
         group.getChildren().add(circle);
 
@@ -123,6 +127,7 @@ public class TreeOfLifeVisual {
 
         javafx.scene.text.Text text = new javafx.scene.text.Text(x - 15, y + 20, name); // Déplacez le texte un peu plus loin du centre du blossom
         text.setFill(Color.WHITE);
+        text.setFont(new Font(textSize)); // Définir la taille du texte
         group.getChildren().add(text);
     }
 
