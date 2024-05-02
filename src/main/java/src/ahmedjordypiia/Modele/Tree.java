@@ -15,7 +15,7 @@ public class Tree {
             String line;
             reader.readLine();
             while ((line = reader.readLine()) != null) {
-                String[] fields = line.split(",");
+                String[] fields = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
                 Node node = new Node(fields);
                 nodes.put(node.getId(), node);
             }

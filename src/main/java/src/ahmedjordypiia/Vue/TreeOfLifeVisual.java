@@ -3,6 +3,8 @@ package src.ahmedjordypiia.Vue;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
@@ -20,6 +22,7 @@ public class TreeOfLifeVisual {
 
     private double mouseAnchorX;
     private double mouseAnchorY;
+    private Canvas canvas;
     private Scale scale = new Scale();
     private final double zoomIntensity = 1.1;
     private Affine affine = new Affine();
@@ -66,9 +69,14 @@ public class TreeOfLifeVisual {
 
         try {
             // Charger les données des nœuds et des liens à partir des fichiers CSV
+            //Tree tree = new Tree();
+            //tree.readNodesCSV("src/main/resources/src/ahmedjordypiia/treeoflife_nodes_simplified.csv");
+            //tree.readLinksCSV("src/main/resources/src/ahmedjordypiia/treeoflife_links_simplified.csv");
+
+            // Charger les données complètes des nœuds et des liens à partir des fichiers CSV
             Tree tree = new Tree();
-            tree.readNodesCSV("src/main/resources/src/ahmedjordypiia/treeoflife_nodes_simplified.csv");
-            tree.readLinksCSV("src/main/resources/src/ahmedjordypiia/treeoflife_links_simplified.csv");
+            tree.readNodesCSV("src/main/resources/src/ahmedjordypiia/treeoflife_nodes.csv");
+            tree.readLinksCSV("src/main/resources/src/ahmedjordypiia/treeoflife_links.csv");
 
             // Dessiner l'arbre de vie
             drawTree(root, tree.getNodes().get(0), WINDOW_WIDTH / 2, WINDOW_HEIGHT / 1.25, -90, 150, 8); // Changez la longueur de 100 à 200
@@ -124,6 +132,10 @@ public class TreeOfLifeVisual {
         javafx.scene.text.Text text = new javafx.scene.text.Text(x - 15, y + 20, name); // Déplacez le texte un peu plus loin du centre du blossom
         text.setFill(Color.WHITE);
         group.getChildren().add(text);
+    }
+
+    public Canvas getCanvas() {
+        return this.canvas;
     }
 
     public void zoomIn() {

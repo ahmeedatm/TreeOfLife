@@ -4,47 +4,90 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
-import src.ahmedjordypiia.Modele.Tree;
 import src.ahmedjordypiia.Vue.TreeOfLifeVisual;
 
 public class Recherche {
 
     @FXML
-    public Button zoomInButton;
+    private BorderPane borderPane;
+
     @FXML
-    public Button zoomOutButton;
-    @FXML
-    public TextField searchField;
-    @FXML
-    public Button searchButton;
-    @FXML
-    public Text speciesName;
-    @FXML
-    private HBox topBar;
+    private Button closeButton;
+
     @FXML
     private Rectangle espece;
+
+    @FXML
+    private Button especeDetails;
+
+    @FXML
+    private StackPane leftBar;
+
+    @FXML
+    private Button searchButton;
+
+    //@FXML
+    //private AutoCompleteTextField<?> searchField;
+
+    @FXML
+    private ScrollPane speciesMenu;
+
+    @FXML
+    private Text speciesName;
+
+    @FXML
+    private Text speciesNameMenu;
+
+    @FXML
+    private Text speciesDescription;
+
+    @FXML
+    private HBox topBar;
+
     @FXML
     private Pane treePane;
+
+    @FXML
+    private Button zoomInButton;
+
+    @FXML
+    private Button zoomOutButton;
+
     private TreeOfLifeVisual tree;
 
     public void initialize() {
         TreeOfLifeVisual tree = new TreeOfLifeVisual();
         Group treeGroup = tree.getTreeGroup();
         treePane.getChildren().add(treeGroup);
+        speciesMenu.setVisible(false);
+        speciesNameMenu.setText(speciesName.getText());
     }
 
     @FXML
     public void search(MouseEvent event) {
-        String name = searchField.getText();
+        //String name = searchField.getText();
         //tree.searchNode(name);
-        speciesName.setText(name);
+        //speciesName.setText(name);
+    }
+
+    @FXML
+    void openEspecePanel(ActionEvent event) {
+        speciesNameMenu.setText(speciesName.getText());
+        speciesMenu.setVisible(true);
+    }
+
+    @FXML
+    void closeEspecePanel(ActionEvent event) {
+        speciesNameMenu.setText("");
+        speciesMenu.setVisible(false);
     }
 
     @FXML
