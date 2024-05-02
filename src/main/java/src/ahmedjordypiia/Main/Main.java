@@ -2,14 +2,9 @@ package src.ahmedjordypiia.Main;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import src.ahmedjordypiia.Controle.Control;
-import src.ahmedjordypiia.Vue.TreeOfLifeVisual;
 
 import java.io.IOException;
 

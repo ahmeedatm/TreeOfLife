@@ -23,7 +23,7 @@ import java.io.IOException;
 
 import static javafx.scene.paint.Color.rgb;
 
-public class Recherche {
+public class Control {
 
     @FXML
     private BorderPane borderPane;
@@ -77,7 +77,7 @@ public class Recherche {
     private TreeOfLifeVisual tree = new TreeOfLifeVisual();
     private Application application;
 
-    public Recherche() throws IOException {
+    public Control() throws IOException {
     }
 
     public void initialize() throws IOException {
