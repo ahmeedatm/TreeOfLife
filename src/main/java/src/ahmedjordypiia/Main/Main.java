@@ -23,6 +23,12 @@ public class Main extends Application {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/src/ahmedjordypiia/treeOfLife.fxml"));
         Parent root = loader.load();
 
+        // Get the controller
+        Recherche controller = loader.getController();
+
+        // Set the application
+        controller.setApplication(this);
+
         // Définir la scène avec le Parent chargé
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);

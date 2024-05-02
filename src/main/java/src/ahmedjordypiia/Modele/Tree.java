@@ -52,18 +52,6 @@ public class Tree {
 //        return null;
 //    }
 
-    public static void main(String[] args) {
-        Tree tree = new Tree();
-        try {
-            tree.readNodesCSV("src/main/resources/src/ahmedjordypiia/treeoflife_nodes_simplified.csv");
-            tree.readLinksCSV("src/main/resources/src/ahmedjordypiia/treeoflife_links_simplified.csv");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        printTree(tree.getNodes().get(0), 0);
-    }
-
     private static void printTree(Node node, int level) {
         StringBuilder indent = new StringBuilder();
         for (int i = 0; i < level; i++) {
@@ -74,5 +62,44 @@ public class Tree {
             printTree(child, level + 1);
         }
     }
+
+    public Node searchNode(String name) {
+        for (Node node : nodes.values()) {
+            if (node.getName().equalsIgnoreCase(name)) {
+                return node;
+            }
+        }
+        return null;
+    }
+
+    public void printNodeInfo (Node node) {
+        System.out.println("Node name: " + node.getName());
+        System.out.println("Node ID: " + node.getId());
+        System.out.println("Node childNodes: " + node.getChildNodes());
+        System.out.println("Node leafNodes: " + node.getLeafNodes());
+        System.out.println("Node tolorLink: " + node.getTolorgLink());
+        System.out.println("Node extinct: " + node.getExtinct());
+        System.out.println("Node confidence: " + node.getConfidence());
+        System.out.println("Node phylesis: " + node.getPhylesis());
+    }
+
+    //test searchNodes in a main
+    public static void main(String[] args) {
+        Tree tree = new Tree();
+        try {
+            tree.readNodesCSV("src/main/resources/src/ahmedjordypiia/treeoflife_nodes_simplified.csv");
+            tree.readLinksCSV("src/main/resources/src/ahmedjordypiia/treeoflife_links_simplified.csv");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        Node node = tree.searchNode("viruses");
+        if (node != null) {
+            tree.printNodeInfo(node);
+        } else {
+            System.out.println("Node not found");
+        }
+    }
+
 
 }

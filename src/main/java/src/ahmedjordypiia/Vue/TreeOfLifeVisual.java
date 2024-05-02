@@ -15,17 +15,26 @@ import javafx.scene.transform.Scale;
 import javafx.stage.Stage;
 import src.ahmedjordypiia.Modele.*;
 
+import java.io.IOException;
+
 public class TreeOfLifeVisual {
 
     private final int WINDOW_WIDTH = 1000; // Modifiez cette valeur pour ajuster la largeur de la fenêtre
     private final int WINDOW_HEIGHT = 700; // Modifiez cette valeur pour ajuster la hauteur de la fenêtre
 
+    private Tree tree;
     private double mouseAnchorX;
     private double mouseAnchorY;
     private Canvas canvas;
     private Scale scale = new Scale();
     private final double zoomIntensity = 1.1;
     private Affine affine = new Affine();
+
+    public TreeOfLifeVisual() throws IOException {
+        tree = new Tree();
+        tree.readNodesCSV("src/main/resources/src/ahmedjordypiia/treeoflife_nodes.csv");
+        tree.readLinksCSV("src/main/resources/src/ahmedjordypiia/treeoflife_links.csv");
+    }
 
     public Group getTreeGroup() {
         Group root = new Group();
@@ -68,15 +77,6 @@ public class TreeOfLifeVisual {
         });
 
         try {
-            // Charger les données des nœuds et des liens à partir des fichiers CSV
-            //Tree tree = new Tree();
-            //tree.readNodesCSV("src/main/resources/src/ahmedjordypiia/treeoflife_nodes_simplified.csv");
-            //tree.readLinksCSV("src/main/resources/src/ahmedjordypiia/treeoflife_links_simplified.csv");
-
-            // Charger les données complètes des nœuds et des liens à partir des fichiers CSV
-            Tree tree = new Tree();
-            tree.readNodesCSV("src/main/resources/src/ahmedjordypiia/treeoflife_nodes.csv");
-            tree.readLinksCSV("src/main/resources/src/ahmedjordypiia/treeoflife_links.csv");
 
             // Dessiner l'arbre de vie
             drawTree(root, tree.getNodes().get(0), WINDOW_WIDTH / 2, WINDOW_HEIGHT / 1.25, -90, 150, 8); // Changez la longueur de 100 à 200
@@ -134,6 +134,10 @@ public class TreeOfLifeVisual {
         group.getChildren().add(text);
     }
 
+    public Tree getTree() {
+        return this.tree;
+    }
+
     public Canvas getCanvas() {
         return this.canvas;
     }
@@ -149,5 +153,22 @@ public class TreeOfLifeVisual {
     }
     public void zoom(double factor, double x, double y) {
         affine.prependScale(factor, factor, x, y);
+    }
+
+    public void setMouseAnchorX(double x) {
+        this.mouseAnchorX = x;
+    }
+
+    public void setMouseAnchorY(double y) {
+        this.mouseAnchorY = y;
+    }
+
+
+    public double getMouseAnchorX() {
+        return mouseAnchorX;
+    }
+
+    public double getMouseAnchorY() {
+        return mouseAnchorY;
     }
 }

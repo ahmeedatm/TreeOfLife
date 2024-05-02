@@ -2,6 +2,7 @@ module src.ahmedjordypiia {
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.graphics;
+    requires jsoup;
 
     exports src.ahmedjordypiia.Vue to javafx.graphics;
 
