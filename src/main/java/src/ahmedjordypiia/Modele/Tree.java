@@ -15,7 +15,7 @@ public class Tree {
             String line;
             reader.readLine();
             while ((line = reader.readLine()) != null) {
-                String[] fields = line.split(",");
+                String[] fields = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
                 Node node = new Node(fields);
                 nodes.put(node.getId(), node);
             }
@@ -55,8 +55,8 @@ public class Tree {
     public static void main(String[] args) {
         Tree tree = new Tree();
         try {
-            tree.readNodesCSV("src/main/resources/src/ahmedjordypiia/treeoflife_nodes_simplified.csv");
-            tree.readLinksCSV("src/main/resources/src/ahmedjordypiia/treeoflife_links_simplified.csv");
+            tree.readNodesCSV("src/main/resources/src/ahmedjordypiia/treeoflife_nodes.csv");
+            tree.readLinksCSV("src/main/resources/src/ahmedjordypiia/treeoflife_links.csv");
         } catch (IOException e) {
             e.printStackTrace();
         }

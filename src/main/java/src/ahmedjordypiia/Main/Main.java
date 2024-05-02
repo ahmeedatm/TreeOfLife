@@ -30,6 +30,8 @@ public class Main extends Application {
         // Définir la taille de la fenêtre
         primaryStage.setMinWidth(1000);
         primaryStage.setMinHeight(700);
+        primaryStage.setMaxWidth(1000);
+        primaryStage.setMaxHeight(700);
 
         primaryStage.show();
     }

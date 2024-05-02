@@ -46,4 +46,12 @@ public class Node {
     public boolean isLeafNode() {
         return children.isEmpty();
     }
+
+    public int getMaxDepth() {
+        int maxDepth = 0;
+        for (Node child : children) {
+            maxDepth = Math.max(maxDepth, child.getMaxDepth());
+        }
+        return maxDepth + 1;
+    }
 }
