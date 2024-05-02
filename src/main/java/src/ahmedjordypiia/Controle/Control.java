@@ -51,9 +51,21 @@ public class Control {
     private TreeOfLifeVisual tree;
 
     public void initialize() {
-        TreeOfLifeVisual tree = new TreeOfLifeVisual();
+        tree = new TreeOfLifeVisual();
         Group treeGroup = tree.getTreeGroup();
         treePane.getChildren().add(treeGroup);
+
+        // Ajouter un gestionnaire d'événements de zoom à l'arbre
+        treePane.setOnScroll(event -> {
+            double zoomFactor = 1.05;
+            double deltaY = event.getDeltaY();
+            if (deltaY < 0){
+                zoomFactor = 0.95;
+            }
+            treeGroup.setScaleX(treeGroup.getScaleX() * zoomFactor);
+            treeGroup.setScaleY(treeGroup.getScaleY() * zoomFactor);
+            event.consume();
+        });
     }
 
     @FXML
