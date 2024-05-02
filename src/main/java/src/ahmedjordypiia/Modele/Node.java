@@ -24,8 +24,6 @@ public class Node {
         this.extinct = Integer.parseInt(fields[5]);
         this.confidence = Integer.parseInt(fields[6]);
         this.phylesis = Integer.parseInt(fields[7]);
-
-
     }
 
     public Integer getId() {
@@ -49,6 +47,14 @@ public class Node {
 
     public boolean isLeafNode() {
         return children.isEmpty();
+    }
+
+    public int getMaxDepth() {
+        int maxDepth = 0;
+        for (Node child : children) {
+            maxDepth = Math.max(maxDepth, child.getMaxDepth());
+        }
+        return maxDepth + 1;
     }
 
     public int getChildNodes() {

@@ -8,7 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import src.ahmedjordypiia.Controle.Recherche;
+import src.ahmedjordypiia.Controle.Control;
 import src.ahmedjordypiia.Vue.TreeOfLifeVisual;
 
 import java.io.IOException;
@@ -30,6 +30,8 @@ public class Main extends Application {
         // Définir la taille de la fenêtre
         primaryStage.setMinWidth(1000);
         primaryStage.setMinHeight(700);
+        primaryStage.setMaxWidth(1000);
+        primaryStage.setMaxHeight(700);
 
         primaryStage.show();
     }
