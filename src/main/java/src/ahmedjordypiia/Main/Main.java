@@ -8,7 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import src.ahmedjordypiia.Controle.Recherche;
+import src.ahmedjordypiia.Controle.Control;
 import src.ahmedjordypiia.Vue.TreeOfLifeVisual;
 
 import java.io.IOException;

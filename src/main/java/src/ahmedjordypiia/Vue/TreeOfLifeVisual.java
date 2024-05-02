@@ -16,8 +16,8 @@ import src.ahmedjordypiia.Modele.*;
 
 public class TreeOfLifeVisual {
 
-    private final int WINDOW_WIDTH = 1000; // Modifiez cette valeur pour ajuster la largeur de la fenêtre
-    private final int WINDOW_HEIGHT = 700; // Modifiez cette valeur pour ajuster la hauteur de la fenêtre
+    private final int WINDOW_WIDTH = 1000;
+    private final int WINDOW_HEIGHT = 700;
 
     private double mouseAnchorX;
     private double mouseAnchorY;
@@ -28,6 +28,10 @@ public class TreeOfLifeVisual {
     public Group getTreeGroup() {
         Group root = new Group();
         root.getTransforms().setAll(affine);
+
+        // Ajouter un zoom initial
+        root.setScaleX(1.5); // Zoom de 50% en X
+        root.setScaleY(1.5); // Zoom de 50% en Y
 
         root.setOnScroll(event -> {
             double delta = event.getDeltaY();
@@ -72,8 +76,7 @@ public class TreeOfLifeVisual {
             tree.readLinksCSV("src/main/resources/src/ahmedjordypiia/treeoflife_links.csv");
 
             // Dessiner l'arbre de vie
-            drawTree(root, tree, tree.getNodes().get(0), WINDOW_WIDTH / 2.55 , WINDOW_HEIGHT / 1.95, -120, 150, 8, 20, 5); // 5 est la taille du cercle initial            root.getTransforms().add(scale);
-
+            drawTree(root, tree, tree.getNodes().get(0), WINDOW_WIDTH / 2.55 , WINDOW_HEIGHT / 1.95, -120, 150, 8, 20, 5, 2.0); // 2.0 est l'épaisseur de ligne initiale
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -81,7 +84,7 @@ public class TreeOfLifeVisual {
         return root;
     }
 
-    private void drawTree(Group group, Tree tree, Node node, double x, double y, double angle, double length, int depth, double textSize, double circleSize) {
+    private void drawTree(Group group, Tree tree, Node node, double x, double y, double angle, double length, int depth, double textSize, double circleSize, double lineThickness) {
         // Ajuster la taille du texte en fonction du nombre de branches
         double adjustedTextSize;
         if (node.getChildren().size() >= 2) { // Si le nœud a deux enfants ou plus
@@ -103,15 +106,12 @@ public class TreeOfLifeVisual {
         if (node == tree.getNodes().get(0)) { // Si le nœud actuel est le nœud racine
             angleStep = 300.0 / (node.getChildren().size()); // Répartir les enfants sur 300 degrés
         } else {
-            angleStep = 1.3 * Math.min(180.0 / (Math.max(node.getChildren().size(), 1) + 1), 180.0 / node.getChildren().size());
+            angleStep = 1.4 * Math.min(180.0 / (Math.max(node.getChildren().size(), 1) + 1), 180.0 / node.getChildren().size());
         }
 
         // Appels récursifs pour les branches plus petites
         for (int i = 0; i < node.getChildren().size(); i++) {
             Node child = node.getChildren().get(i);
-
-            // Calculer l'angle et le point final de la branche pour cet enfant
-//            double childAngle = angle - 90 + angleStep * (i + 1);
 
             // Ajuster la longueur en fonction de la profondeur du sous-arbre
             double adjustedLength;
@@ -137,7 +137,7 @@ public class TreeOfLifeVisual {
             if (node.getChildren().size() == 1) { // Si le nœud a un seul enfant
                 childAngle = angle; // Dessiner l'enfant à la même angle que le parent
             } else {
-                childAngle = angle - 90 + angleStep * (i+0.1); // Calculer l'angle par rapport à l'angle de la branche parente
+                childAngle = angle - 90 + angleStep * (i+0.001); // Calculer l'angle par rapport à l'angle de la branche parente
             }
             double xEnd = x + adjustedLength * Math.cos(Math.toRadians(childAngle));
             double yEnd = y + adjustedLength * Math.sin(Math.toRadians(childAngle));
@@ -146,10 +146,11 @@ public class TreeOfLifeVisual {
             // Dessiner la branche
             Line line = new Line(x, y, xEnd, yEnd);
             line.setStroke(Color.rgb(255, 255, 255, 0.5)); // Utiliser une couleur blanche avec une opacité de 50%
+            line.setStrokeWidth(lineThickness); // Utiliser l'épaisseur de ligne ajustée
             group.getChildren().add(line);
 
             // Dessiner l'arbre pour cet enfant
-            drawTree(group, tree, child, xEnd, yEnd, childAngle, nextLength, depth - 1, textSize * 0.4, circleSize * 0.5); // réduire la taille du cercle de 10% à chaque niveau
+            drawTree(group, tree, child, xEnd, yEnd, childAngle, nextLength, depth - 1, textSize * 0.4, circleSize * 0.5, lineThickness * 0.4); // réduire l'épaisseur de la ligne de 20% à chaque niveau
         }
     }
 

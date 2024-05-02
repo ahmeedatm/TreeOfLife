@@ -14,7 +14,23 @@ import javafx.scene.text.Text;
 import src.ahmedjordypiia.Modele.Tree;
 import src.ahmedjordypiia.Vue.TreeOfLifeVisual;
 
-public class Recherche {
+//package src.ahmedjordypiia.Controle;
+
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.Group;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
+import src.ahmedjordypiia.Modele.Tree;
+import src.ahmedjordypiia.Vue.TreeOfLifeVisual;
+
+public class Control {
 
     @FXML
     public Button zoomInButton;
