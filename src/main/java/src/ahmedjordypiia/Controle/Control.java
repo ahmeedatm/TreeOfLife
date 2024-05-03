@@ -58,6 +58,8 @@ public class Control {
     private Rectangle espece;
     @FXML
     private Pane treePane;
+    @FXML
+    private Button reloadButton;
     private TreeOfLifeVisual tree;
     private ImageView speciesImage;
 
@@ -105,10 +107,11 @@ public class Control {
             setCurrentNode(node);
             openEspecePanel(null);
         }else {
-            searchField.setPromptText("Espèce non trouvée");
-            searchField.setStyle("-fx-prompt-text-fill: " + rgb(255, 0, 0));
             searchField.setText("");
-            searchField.setStyle("-fx-background-color:" + rgb(0,0,0,255));
+            searchField.setPromptText("Espèce non trouvée");
+            //prompt text color
+            searchField.setStyle("-fx-prompt-text-fill: red;");
+            searchField.setStyle("-fx-background-color: transparent;");
         }
     }
 
@@ -116,6 +119,12 @@ public class Control {
     void openEspecePanel(ActionEvent event) {
         speciesNameMenu.setText(speciesName.getText());
         speciesMenu.setVisible(true);
+    }
+    
+    @FXML
+    void reloadZoom(ActionEvent event) {
+        tree.getTreeGroup().setScaleX(1.5);
+        tree.getTreeGroup().setScaleY(1.5);
     }
 
     @FXML

@@ -70,7 +70,7 @@
                   </Button>
                </children>
             </StackPane>
-            <Button alignment="CENTER" maxWidth="55.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" style="-fx-min-width: 20px; -fx-min-height: 20px; -fx-max-width: 20px; -fx-max-height: 20px; -fx-background-radius: 10px; -fx-background-color: WtransparentHITE;" textAlignment="CENTER" textFill="TRANSPARENT" textOverrun="CENTER_ELLIPSIS">
+            <Button fx:id="reloadButton" alignment="CENTER" maxWidth="55.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#reloadZoom" prefHeight="25.0" prefWidth="25.0" style="-fx-min-width: 20px; -fx-min-height: 20px; -fx-max-width: 20px; -fx-max-height: 20px; -fx-background-radius: 10px; -fx-background-color: WtransparentHITE;" textAlignment="CENTER" textFill="TRANSPARENT" textOverrun="CENTER_ELLIPSIS">
                <graphic>
                   <ImageView fitHeight="23.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
                      <image>
